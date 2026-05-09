@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>XCP on Serial</name>
+  <buildconfigurationinfo AssemblyFlags="" CPPCompileFlags="" CPPLinkFlags="" CompileFlags="" LinkFlags="">
+    <Defines>XCP_CUSTOM_PLATFORM</Defines>
+    <Defines>XCP_TIMESTAMP_BASED_ON_SIMULATION_TIME</Defines>
+    <Defines>EXTMODE_DISABLE_ARGS_PROCESSING</Defines>
+    <Name>XCP on Serial</Name>
+    <SourceFiles>$(TARGET_ROOT)/src/rtiostream_serial_am13x.c</SourceFiles>
+    <SourceFiles>$(TARGET_ROOT)/src/xcp_platform_custom.c</SourceFiles>
+    <SupportedOperatingSystems>all</SupportedOperatingSystems>
+    <SupportedToolchains>all</SupportedToolchains>
+  </buildconfigurationinfo>
+</productinfo>

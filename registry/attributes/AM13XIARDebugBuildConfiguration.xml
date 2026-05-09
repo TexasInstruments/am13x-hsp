@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>AM13X IAR Debug Build Configuration</name>
+  <buildconfigurationinfo AssemblyFlags="" CPPCompileFlags="" CPPLinkFlags="" CompileFlags="" LinkFlags="">
+    <IncludePaths>$(TARGET_ROOT)/include</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/source</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/source/device/am13e230x/include</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/source/device/am13e230x/include/hw</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/ti_sdk_config/am13e230x/default/device_support/include</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/source/arch/include</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/source/arch/m33/include</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/ti_sdk_config/am13e230x/default/arch_cfg</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/source/cmsis/Core/Include</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/source/driverlib/am13e230x</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/source/utils/log/include</IncludePaths>
+    <IncludePaths>$(COM_TI_AM13E230X_SDK_INSTALL_DIR)/ti_sdk_config/am13e230x/default/utils_cfg</IncludePaths>
+    <Name>AM13X IAR Debug Build Configuration</Name>
+    <SourceFiles>$(TARGET_ROOT)/src/am13x_tick.c</SourceFiles>
+    <SourceFiles>$(TARGET_ROOT)/src/am13x_multitasking.c</SourceFiles>
+    <SupportedOperatingSystems>all</SupportedOperatingSystems>
+    <SupportedToolchains>all</SupportedToolchains>
+  </buildconfigurationinfo>
+</productinfo>

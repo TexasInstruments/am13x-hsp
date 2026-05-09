@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo>
+  <name>AM13E230x</name>
+  <parametergroup>
+    <name>Clocking</name>
+    <parameter Alignment="1" Callback="widgetChangedCallback" ColSpan="[1,3]" Data="" DialogRefresh="1" DoNotStore="false" Enabled="0" Entries="" EntriesType="" Name="CPU Clock (MHz):" RowSpan="[0,0]" SaveValueAsString="true" Storage="Clocking.cpuClockRateMHz" Tag="CPU_Clock_in_MHz" ToolTip="" Type="edit" TypePUAttachedTo="cpu" Value="MCLK_FREQ_HZ" ValueRange="" ValueType="" Visible="0"/>
+  </parametergroup>
+  <parametergroup>
+    <name>SysConfig</name>
+    <parameter Alignment="1" Callback="widgetChangedCallback" ColSpan="[1,3]" Data="" DialogRefresh="0" DoNotStore="false" Enabled="1" Entries="Build; Build, load, and run" EntriesType="" Name="Build action:" RowSpan="[1,1]" SaveValueAsString="true" Storage="Runtime.BuildAction" Tag="Build_action" ToolTip="" Type="combobox" TypePUAttachedTo="cpu" Value="Build, load, and run" ValueRange="" ValueType="" Visible="0"/>
+    <parameter Alignment="1" Callback="am13x.parameters.syscfgFileEditCallback" ColSpan="[1,2]" Data="" DialogRefresh="1" DoNotStore="false" Enabled="1" Entries="" EntriesType="" Name="SysConfig project file:" RowSpan="[2,2]" SaveValueAsString="true" Storage="SysConfig.ProjectFile" Tag="SysConfig_ProjectFile" ToolTip="" Type="edit" TypePUAttachedTo="cpu" Value="am13x.parameters.syscfgFileGetValue(hObj)" ValueRange="" ValueType="callback" Visible="1"/>
+    <parameter Alignment="1" Callback="am13x.parameters.syscfgFileBrowseCallback" ColSpan="[3,3]" Data="" DialogRefresh="1" DoNotStore="false" Enabled="1" Entries="" EntriesType="" Name="Browse..." RowSpan="[2,2]" SaveValueAsString="true" Storage="" Tag="SysConfig_ProjectFileButton" ToolTip="Browse to select an existing SysConfig project file" Type="pushbutton" TypePUAttachedTo="cpu" Value="" ValueRange="" ValueType="" Visible="1"/>
+    <parameter Alignment="1" Callback="am13x.parameters.syscfgFileCreateCallback" ColSpan="[1,1]" Data="" DialogRefresh="1" DoNotStore="false" Enabled="1" Entries="" EntriesType="" Name="Create..." RowSpan="[3,3]" SaveValueAsString="true" Storage="" Tag="SysConfig_ProjectCreateButton" ToolTip="Create a new SysConfig project file" Type="pushbutton" TypePUAttachedTo="cpu" Value="" ValueRange="" ValueType="" Visible="1"/>
+    <parameter Alignment="1" Callback="am13x.parameters.syscfgFileLaunchCallback" ColSpan="[2,2]" Data="" DialogRefresh="1" DoNotStore="false" Enabled="1" Entries="" EntriesType="" Name="Launch..." RowSpan="[3,3]" SaveValueAsString="true" Storage="" Tag="SysConfig_ProjectLaunchButton" ToolTip="Launch the SysConfig CodeGen Tool with selected project" Type="pushbutton" TypePUAttachedTo="cpu" Value="" ValueRange="" ValueType="" Visible="1"/>
+  </parametergroup>
+  <parametergroup>
+    <name>Connectivity</name>
+    <parameter Alignment="1" Callback="" ColSpan="[1,1]" Data="" DialogRefresh="group" DoNotStore="false" Enabled="1" Entries="Serial" EntriesType="" Name="Connection interface for PIL or external mode" RowSpan="[1,1]" SaveValueAsString="true" Storage="Connection.Interface" Tag="Connection_Interface" ToolTip="Select connection interface for PIL or external mode" Type="combobox" TypePUAttachedTo="cpu" Value="Serial" ValueRange="" ValueType="" Visible="1"/>
+    <parameter Alignment="1" Callback="am13x.parameters.setSerialPort" ColSpan="[1,1]" Data="" DialogRefresh="0" DoNotStore="false" Enabled="1" Entries="" EntriesType="" Name="Serial port" RowSpan="[2,2]" SaveValueAsString="true" Storage="Connection.Serialport" Tag="Connection_Serialport" ToolTip="Serial port (e.g., COM1, COM3)" Type="edit" TypePUAttachedTo="cpu" Value="am13x.parameters.getSerialPort(hObj)" ValueRange="" ValueType="callback" Visible="1"/>
+    <parameter Alignment="1" Callback="am13x.parameters.setSerialBaud" ColSpan="[1,1]" Data="" DialogRefresh="0" DoNotStore="false" Enabled="1" Entries="" EntriesType="" Name="Baud rate" RowSpan="[3,3]" SaveValueAsString="true" Storage="Connection.Baud" Tag="Connection_Baud" ToolTip="Serial baud rate in bits/sec (e.g., 115200)" Type="edit" TypePUAttachedTo="cpu" Value="am13x.parameters.getSerialBaud(hObj)" ValueRange="" ValueType="callback" Visible="1"/>
+  </parametergroup>
+</productinfo>

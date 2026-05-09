@@ -1,0 +1,120 @@
+%% hwi_am13x.tlc
+%%
+%% Abstract:
+%%   TLC block file for the hwi_am13x S-function.
+%%   Generates a hardware ISR wrapper function for the TI AM13x
+%%   (AM263x / AM243x) Vector Interrupt Manager (VIM).
+%%
+%%   The generated ISR wrapper:
+%%     1. Has the exact function name configured in the block mask.
+%%     2. Inlines the connected function-call subsystem body.
+%%
+%%   For each instance of this block the following is emitted into
+%%   the model source file:
+%%
+%%       void Timer0_IRQHandler(void)
+%%       {
+%%           <inlined subsystem body>
+%%       }
+%%
+
+%% Copyright (C) 2026 Texas Instruments Incorporated
+%%     %
+%% Redistribution and use in source and binary forms, with or without
+%% modification, are permitted provided that the following conditions
+%% are met:
+%%     %
+%%   Redistributions of source code must retain the above copyright
+%%   notice, this list of conditions and the following disclaimer.
+%%     %
+%%   Redistributions in binary form must reproduce the above copyright
+%%   notice, this list of conditions and the following disclaimer in the
+%%   documentation and/or other materials provided with the
+%%   distribution.
+%%     %
+%%   Neither the name of Texas Instruments Incorporated nor the names of
+%%   its contributors may be used to endorse or promote products derived
+%%   from this software without specific prior written permission.
+%%     %
+%% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+%% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+%% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+%% A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+%% OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+%% SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+%% LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+%% DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+%% THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+%% (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+%% OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+%implements hwi_am13x "C"
+
+%% =========================================================================
+%% BlockTypeSetup
+%% Called once per block type per model build.
+%% Add any model-wide includes that the ISR wrapper depends on.
+%% =========================================================================
+%function BlockTypeSetup(block, system) void
+
+    %% Include the AM13x interrupt controller driver header.
+    %% Adjust the path to match your SDK installation if needed.
+    %<LibAddToCommonIncludes("<driverlib.h>")>
+
+%endfunction
+
+
+%% =========================================================================
+%% BlockInstanceSetup
+%% Warn if the function-call output is not connected to any subsystem.
+%% =========================================================================
+%function BlockInstanceSetup(block, system) void
+
+    %if LibIsEqual(SFcnSystemOutputCall[0].BlockToCall, "unconnected")
+        %assign wrnTxt = "No code will be generated for ISR '%<Name>' " ...
+                         "since it is not connected to a subsystem."
+        %<LibReportWarning(wrnTxt)>
+    %endif
+
+%endfunction
+
+
+%% =========================================================================
+%% Outputs
+%% Emits the ISR function at file scope with the subsystem body inlined.
+%% =========================================================================
+%function Outputs(block, system) Output
+
+    %assign callIdx     = 0
+    %assign handlerName = SFcnParamSettings.HANDLER_NAME
+    %assign prologCode  = SFcnParamSettings.PROLOG_CODE
+    %assign epilogCode  = SFcnParamSettings.EPILOG_CODE
+
+    %% Capture the inlined contents of the connected function-call subsystem
+    %openfile tmpBuf
+    %<LibBlockExecuteFcnCall(block, callIdx)>\
+    %closefile tmpBuf
+
+    %% Build the ISR function and place it at file scope
+    %openfile funcBuf
+    /* AM13x Hardware Interrupt: '%<Name>' */
+    void %<handlerName>(void)
+    {
+        %if !LibIsEqual(prologCode, "")
+        /* Prolog - e.g. clear interrupt flag */
+        %<prologCode>;
+        %endif
+
+        %<tmpBuf>
+        %if !LibIsEqual(epilogCode, "")
+        /* Epilog - e.g. re-enable interrupt */
+        %<epilogCode>;
+        %endif
+    }
+
+    %closefile funcBuf
+    %<LibSetSourceFileSection(LibGetModelDotCFile(), "Functions", funcBuf)>
+
+%endfunction
+
+%% EOF: hwi_am13x.tlc

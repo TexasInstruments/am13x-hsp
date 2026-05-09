@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>AM13X Deployer</name>
+  <targetname>AM13E230x</targetname>
+  <targetinitializationcall>Device_Init()</targetinitializationcall>
+  <targetinitializationcall>/* Device_Init enables interrupt, disable here to avoid firing interrupts early during peripheral initialization */</targetinitializationcall>
+  <targetinitializationcall>__disable_irq()</targetinitializationcall>
+  <targetinitializationcall>SYSCFG_DL_init()</targetinitializationcall>
+  <globalinterruptenablecall>__enable_irq();/* Enable interrupt after peripheral initialization */</globalinterruptenablecall>
+  <pilinfo>
+    <Name>PIL on Serial</Name>
+    <Transport AvailableBaudrates="115200" AvailableCOMPorts="COM1" Baudrate="115200" COMPort="COM1" Type="serial">
+      <Name>PIL on Serial</Name>
+      <IOInterfaceName>PIL on Serial</IOInterfaceName>
+    </Transport>
+  </pilinfo>
+  <includefile>am13x_main.h</includefile>
+  <needsmainfcn>true</needsmainfcn>
+  <mainfcnsignature>int main(int argc, char **argv)</mainfcnsignature>
+  <token Name="ARMCORTEXM_ROOT_DIR" Value="matlabshared.target.am13x.getReferenceTargetRootFolder"/>
+  <onhardwareselecthook>am13x.onHardwareSelectHook</onhardwareselecthook>
+  <onaftercodegenhook>am13x.onAfterCodegenHook</onaftercodegenhook>
+  <profiler BufferName="profilingData" DataLength="50" InstantPrint="0" PrintData="1" StoreCoreId="1" TimerDataType="uint32" TimerReadFcn="profileReadTimer" TimerTicksPerS="1000000000" TimerUpcounting="1">
+    <Name>Profiler AM13x</Name>
+    <TimerSrcFile>$(TARGET_ROOT)/src/profiler_timer_am13x.c</TimerSrcFile>
+    <TimerIncludeFile>$(TARGET_ROOT)/include/profiler_timer_am13x.h</TimerIncludeFile>
+    <GetDataFcn>assert(false, Function not supported with this board)</GetDataFcn>
+  </profiler>
+  <detectoverrun>false</detectoverrun>
+  <honorruntimestoprequest>true</honorruntimestoprequest>
+  <sdcardinbackgroundtask>false</sdcardinbackgroundtask>
+  <includestdio>true</includestdio>
+  <enableoneclick>true</enableoneclick>
+  <externalmodeinfo closefcn="" connectfcn="" postdisconnecttargetfcn="" setupfcn="am13x.internal.disableSysTickForXCP(hObj)">
+    <name>XCP on Serial</name>
+    <buildconfigurationinfofile>$(TARGET_ROOT)/registry/attributes/XCPonSerial_ExternalModeBuildConfig.xml</buildconfigurationinfofile>
+    <preconnectfcn>pause(5);</preconnectfcn>
+    <modelparameter callback="" name="OnTargetWaitForStart" value="on"/>
+    <codertargetparameter callback="" name="Runtime.BuildAction">
+      <value>Build, load and run</value>
+    </codertargetparameter>
+    <transport type="serial">
+      <comport value="am13x.parameters.getSerialPortForXCP(hCS)">
+        <visible>false</visible>
+      </comport>
+      <baudrate value="am13x.parameters.getSerialBaud(hCS)">
+        <visible>false</visible>
+      </baudrate>
+      <verbose>
+        <value>true</value>
+        <visible>false</visible>
+      </verbose>
+      <name>XCP on Serial</name>
+      <iointerfacename>XCP on Serial</iointerfacename>
+    </transport>
+    <task default="background">
+      <inbackground>true</inbackground>
+      <inforeground>false</inforeground>
+      <visible>false</visible>
+    </task>
+  </externalmodeinfo>
+  <buildconfigurationinfofile>$(TARGET_ROOT)/registry/attributes/AM13XDebugBuildConfiguration.xml</buildconfigurationinfofile>
+  <buildconfigurationinfofile>$(TARGET_ROOT)/registry/attributes/AM13XIARDebugBuildConfiguration.xml</buildconfigurationinfofile>
+</productinfo>

@@ -1,0 +1,160 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "AM13E230x" --part "AM13E230x" --package "LQFP64_G" --product "AM13E2X SDK@26.00.00"
+ * @v2CliArgs --device "AM13E23019" --package "LQFP64_G" --product "AM13E2X SDK@26.00.00"
+ * @versions {"tool":"1.27.0+4565"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const adc        = scripting.addModule("/drivers/adc", {}, false);
+const adc1       = adc.addInstance();
+const adc2       = adc.addInstance();
+const adc3       = adc.addInstance();
+const gpio       = scripting.addModule("/drivers/gpio", {}, false);
+const gpio1      = gpio.addInstance();
+const interrupt  = scripting.addModule("/drivers/interrupt", {}, false);
+const interrupt1 = interrupt.addInstance();
+const mcpwm      = scripting.addModule("/drivers/mcpwm", {}, false);
+const mcpwm1     = mcpwm.addInstance();
+const sysctl     = scripting.addModule("/drivers/sysctl");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+adc1.$name                    = "ADC_0";
+adc1.numberOfSOCs             = 1;
+adc1.interruptPulseMode       = "DL_ADC_PULSE_END_OF_CONV";
+adc1.numberOfSEQs             = 1;
+adc1.enableSEQs               = true;
+adc1.enabledInts              = ["INT1"];
+adc1.SOC0.name                = "MTR1_IW_SEN";
+adc1.SOC0.independentNameMode = true;
+adc1.SOC0.channel             = "PA17";
+adc1.SEQ1.independentNameMode = true;
+adc1.SEQ1.triggerSel          = "DL_ADC_TRIGGER_PWM4_SOCA";
+adc1.INT1.enableInterrupt     = true;
+adc1.INT1.continuousMode      = true;
+
+adc2.$name                    = "ADC_1";
+adc2.adcBase                  = "ADC1";
+adc2.numberOfSEQs             = 1;
+adc2.numberOfSOCs             = 1;
+adc2.enableSEQs               = true;
+adc2.interruptPulseMode       = "DL_ADC_PULSE_END_OF_CONV";
+adc2.SEQ1.triggerSel          = "DL_ADC_TRIGGER_PWM4_SOCA";
+adc2.SOC0.independentNameMode = true;
+adc2.SOC0.channel             = "PA27";
+adc2.SOC0.name                = "MTR1_IV_SEN";
+
+adc3.adcBase                  = "ADC2";
+adc3.$name                    = "ADC_2";
+adc3.numberOfSOCs             = 1;
+adc3.enableSEQs               = true;
+adc3.numberOfSEQs             = 1;
+adc3.SOC0.independentNameMode = true;
+adc3.SOC0.channel             = "PA30";
+adc3.SOC0.name                = "MTR1_IU_SEN";
+adc3.SEQ1.triggerSel          = "DL_ADC_TRIGGER_PWM4_SOCA";
+
+gpio1.$name                          = "MTR1_GATE_DRIVER";
+gpio1.associatedPins.create(4);
+gpio1.associatedPins[0].initialValue = "SET";
+gpio1.associatedPins[0].$name        = "GATE_EN_GPIO";
+gpio1.associatedPins[0].ioStructure  = "SD";
+gpio1.associatedPins[0].pin.$assign  = "PA3";
+gpio1.associatedPins[1].$name        = "GATE_MODE_GPIO";
+gpio1.associatedPins[1].ioStructure  = "SD";
+gpio1.associatedPins[1].pin.$assign  = "PB7";
+gpio1.associatedPins[2].$name        = "GATE_GAIN_GPIO";
+gpio1.associatedPins[2].ioStructure  = "SD";
+gpio1.associatedPins[2].direction    = "INPUT";
+gpio1.associatedPins[2].pin.$assign  = "PB12";
+gpio1.associatedPins[3].$name        = "GATE_CAL_GPIO";
+gpio1.associatedPins[3].ioStructure  = "SD";
+gpio1.associatedPins[3].pin.$assign  = "PB11";
+
+interrupt1.$name     = "MTR1_FOC_INT1";
+interrupt1.intSource = "ADC0_INT1_INT";
+
+mcpwm1.$name                                       = "MTR1_MCPWM_BASE";
+mcpwm1.enableDeadBand                              = true;
+mcpwm1.enableEventTrigger                          = true;
+mcpwm1.timeBase.$name                              = "drivers_mcpwm_v0_mcpwm_timeBase0";
+mcpwm1.timeBase.emulationMode                      = "DL_MCPWM_EMULATION_FREE_RUN";
+mcpwm1.timeBase.syncPerSource                      = "DL_MCPWM_SYNCPERSEL_SOURCE_PERIOD";
+mcpwm1.timeBase.counterMode                        = "DL_MCPWM_COUNTER_MODE_UP_DOWN";
+mcpwm1.timeBase.periodValue                        = 5000;
+mcpwm1.timeBase.syncOutPulseMode                   = "DL_MCPWM_SYNC_OUT_PULSE_DISABLED";
+mcpwm1.counterCompare.$name                        = "drivers_mcpwm_v0_mcpwm_counterCompare0";
+mcpwm1.counterCompare.CMPC                         = 10;
+mcpwm1.actionQualifier.$name                       = "drivers_mcpwm_v0_mcpwm_actionQualifier0";
+mcpwm1.actionQualifier.PWM1A.$name                 = "drivers_mcpwm_v0_mcpwm_actionQualifierEvents0";
+mcpwm1.actionQualifier.PWM1A.actionAtZero          = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM1A.actionAtCountUpCmpA   = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM1A.actionAtCountDownCmpB = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM1A.actionAtPeriod        = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM1B.$name                 = "drivers_mcpwm_v0_mcpwm_actionQualifierEvents1";
+mcpwm1.actionQualifier.PWM1B.actionAtZero          = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM1B.actionAtCountUpCmpA   = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM1B.actionAtCountDownCmpB = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM1B.actionAtPeriod        = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM2A.$name                 = "drivers_mcpwm_v0_mcpwm_actionQualifierEvents2";
+mcpwm1.actionQualifier.PWM2A.actionAtZero          = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM2A.actionAtCountUpCmpA   = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM2A.actionAtCountDownCmpB = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM2A.actionAtPeriod        = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM2B.$name                 = "drivers_mcpwm_v0_mcpwm_actionQualifierEvents3";
+mcpwm1.actionQualifier.PWM2B.actionAtZero          = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM2B.actionAtCountUpCmpA   = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM2B.actionAtCountDownCmpB = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM2B.actionAtPeriod        = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM3A.$name                 = "drivers_mcpwm_v0_mcpwm_actionQualifierEvents4";
+mcpwm1.actionQualifier.PWM3A.actionAtZero          = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM3A.actionAtCountUpCmpA   = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM3A.actionAtCountDownCmpB = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM3A.actionAtPeriod        = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM3B.$name                 = "drivers_mcpwm_v0_mcpwm_actionQualifierEvents5";
+mcpwm1.actionQualifier.PWM3B.actionAtZero          = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM3B.actionAtCountUpCmpA   = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.actionQualifier.PWM3B.actionAtCountDownCmpB = "DL_MCPWM_AQ_OUTPUT_HIGH";
+mcpwm1.actionQualifier.PWM3B.actionAtPeriod        = "DL_MCPWM_AQ_OUTPUT_LOW";
+mcpwm1.loadMode.$name                              = "drivers_mcpwm_v0_mcpwm_loadMode0";
+mcpwm1.deadBand.$name                              = "drivers_mcpwm_v0_mcpwm_deadBand0";
+mcpwm1.deadBand.enableRED                          = true;
+mcpwm1.deadBand.enableFED                          = true;
+mcpwm1.deadBand.delayRED                           = 20;
+mcpwm1.deadBand.polarityFED                        = "DL_MCPWM_DB_POLARITY_ACTIVE_LOW";
+mcpwm1.deadBand.delayFED                           = 10;
+mcpwm1.peripheral.$assign                          = "MCPWM4";
+mcpwm1.peripheral["1A"].$assign                    = "PB3";
+mcpwm1.peripheral["1B"].$assign                    = "PA7";
+mcpwm1.peripheral["2A"].$assign                    = "PB1";
+mcpwm1.peripheral["2B"].$assign                    = "PA2";
+mcpwm1.peripheral["3A"].$assign                    = "PB2";
+mcpwm1.peripheral["3B"].$assign                    = "PA25";
+mcpwm1.eventTrigger.$name                          = "drivers_mcpwm_v0_mcpwm_eventTrigger0";
+mcpwm1.eventTrigger.SOCA_enable                    = true;
+mcpwm1.eventTrigger.SOCA_eventSource               = "DL_MCPWM_SOC_TBCTR_U_CMPC";
+
+sysctl.useHFCLK     = true;
+sysctl.SYSPLLSource = "DL_SYSCTL_SYSPLL_REF_HFCLK";
+sysctl.SYSPLL_Qdiv  = 32;
+sysctl.VREFSource   = "DL_SYSCTL_VREF_INTERNAL_3_3_V";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+adc1.SOC0.peripheral.$suggestSolution       = "ANALOG";
+adc1.SOC0.peripheral.AIN17.$suggestSolution = "PA17";
+adc2.SOC0.peripheral.$suggestSolution       = "ANALOG";
+adc2.SOC0.peripheral.AIN29.$suggestSolution = "PA27";
+adc3.SOC0.peripheral.$suggestSolution       = "ANALOG";
+adc3.SOC0.peripheral.AIN32.$suggestSolution = "PA30";
+sysctl.peripheral.$suggestSolution          = "SYSCTL";
+sysctl.peripheral.x1Pin.$suggestSolution    = "PC16_X1";
+sysctl.peripheral.x2Pin.$suggestSolution    = "PC17_X2";
