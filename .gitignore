@@ -1,0 +1,19 @@
+# Project gitignores
+*_ert_rtw/
+*/slprj/
+*.out
+*.slxc
+*.bat
+*.elf
+*.slx.autosave
+*.slx.original
+*.asv
+/*.mexw64
+/examples/*.mexw64
+/src/instrumented/
+hsp_am13x_config.json
+package_am13x_hsp.m
+
+# Release specific gitignore
+/doc/generate_docs_html.m
+/test/

@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB 2025b"><title>Embedded Coder Support Package for Texas Instruments AM13x</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.8px; min-height: 0px; white-space: pre-wrap; color: rgb(192, 76, 11); font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: 400; text-align: left;  }
+.S1 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.S2 { margin: 20px 10px 5px 4px; padding: 0px; line-height: 25px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: 700; text-align: left;  }
+.S3 { margin: 15px 10px 5px 4px; padding: 0px; line-height: 20.4px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-style: normal; font-size: 17px; font-weight: 700; text-align: left;  }
+.S4 { margin: 3px; border: 1px solid rgb(191, 191, 191); border-collapse: collapse;  }
+.S5 { background-color: rgba(0, 0, 0, 0);  }
+.S6 { border: 1px solid rgb(191, 191, 191); vertical-align: top;  }
+.S7 { margin: 2px 10px 2px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: break-spaces; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.S8 { margin: 10px 10px 5px 4px; padding: 0px; line-height: 18px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-style: normal; font-size: 15px; font-weight: 700; text-align: left;  }
+.S9 { margin: 10px 0px 20px; padding-left: 0px; font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-size: 14px;  }
+.S10 { margin-left: 56px; line-height: 21px; min-height: 0px; text-align: left; white-space: pre-wrap;  }</style></head><body><div class = rtcContent><h1  class = 'S0'><span style=' font-weight: bold;'>Embedded Coder Support Package for Texas Instruments AM13x</span></h1><div  class = 'S1'><a href = "../chapter_1_introduction/introduction_am13x.html"><span>Back to main page</span></a></div><h2  class = 'S2'><span>Getting Started</span></h2><h3  class = 'S3'><span>Requirements:</span></h3><table  class = 'S4'><col style="width: 6px;" /><col/><col style="width: 171px;" /><col style="width: 464px;" /><tr  class = 'S5'><td  class = 'S6'><div  class = 'S7'><span></span></div></td><td  class = 'S6'><div  class = 'S7'><span>Name</span></div></td><td  class = 'S6'><div  class = 'S7'><span>Version</span></div></td><td  class = 'S6'><div  class = 'S7'><span>Download Links</span></div></td></tr><tr  class = 'S5'><td  class = 'S6'><div  class = 'S7'><span>1</span></div></td><td  class = 'S6'><div  class = 'S7'><span>Code Composer Studio</span></div></td><td  class = 'S6'><div  class = 'S7'><span>20.5.0</span></div></td><td  class = 'S6'><div  class = 'S7'><a href = "https://www.ti.com/tool/download/CCSTUDIO/20.5.0"><span>CCSTUDIO IDE, configuration, compiler or debugger | TI.com</span></a></div></td></tr><tr  class = 'S5'><td  class = 'S6'><div  class = 'S7'><span>2</span></div></td><td  class = 'S6'><div  class = 'S7'><span>TI-ARM-CLANG compiler</span></div></td><td  class = 'S6'><div  class = 'S7'><span>v4.0.4LTS</span></div></td><td  class = 'S6'><div  class = 'S7'><span>use from CCS, e.g.: ccs2050\ccs\tools\compiler\ti-cgt-armllvm_4.0.4.LTS</span></div></td></tr><tr  class = 'S5'><td  class = 'S6'><div  class = 'S7'><span>3</span></div></td><td  class = 'S6'><div  class = 'S7'><span>IAR Embedded WorkBench for Arm</span></div></td><td  class = 'S6'><div  class = 'S7'><span>9.70.1</span></div></td><td  class = 'S6'><div  class = 'S7'><a href = "https://updates.iar.com/?product=EWARM"><span>IAR</span></a></div><div  class = 'S7'><a href = "https://netstorage.iar.com/FileStore/STANDARD/001/004/200/ti_patch_AM13E230x_2_20260304.zip"><span>Patch</span></a><span> if EWARM v9.70 or lower</span></div><div  class = 'S7'><span></span></div></td></tr><tr  class = 'S5'><td  class = 'S6'><div  class = 'S7'><span>3</span></div></td><td  class = 'S6'><div  class = 'S7'><span>AM13E2X-SDK — SDK for AM13E2x Devices</span></div></td><td  class = 'S6'><div  class = 'S7'><span>26_00_00_06</span></div></td><td  class = 'S6'><div  class = 'S7'><a href = "https://www.ti.com/tool/download/AM13E2X-SDK/26.00.00.06.STS"><span>AM13E2X-SDK Software development kit (SDK) | TI.com</span></a></div></td></tr><tr  class = 'S5'><td  class = 'S6'><div  class = 'S7'><span>4</span></div></td><td  class = 'S6'><div  class = 'S7'><span>TI System Configuration Tool</span></div></td><td  class = 'S6'><div  class = 'S7'><span>1.27.0</span></div></td><td  class = 'S6'><div  class = 'S7'><a href = "https://www.ti.com/tool/download/SYSCONFIG/1.27.0.4565"><span>SYSCONFIG IDE, configuration, compiler or debugger | TI.com</span></a></div></td></tr><tr  class = 'S5'><td  class = 'S6'><div  class = 'S7'><span>5</span></div></td><td  class = 'S6'><div  class = 'S7'><span>MATLAB</span></div></td><td  class = 'S6'><div  class = 'S7'><span>R2025b or higher</span></div></td><td  class = 'S6'><div  class = 'S7'><a href = "https://www.mathworks.com/downloads"><span>https://www.mathworks.com/downloads</span></a><span> (requires sign-in) </span></div></td></tr><tr  class = 'S5'><td  class = 'S6'><div  class = 'S7'><span>6</span></div></td><td  class = 'S6'><div  class = 'S7'><span>MinGW-w64</span></div></td><td  class = 'S6'><div  class = 'S7'><span>8.1 or higher for MATLAB R2025b</span></div><div  class = 'S7'><span>14.2 or higher for MATLAB R2026a</span></div></td><td  class = 'S6'><div  class = 'S7'><a href = "https://in.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler"><span>MATLAB Support for MinGW-w64 C/C++/Fortran Compiler - File Exchange - MATLAB Central</span></a></div><div  class = 'S7'><span></span></div><div  class = 'S7'><span></span></div></td></tr><tr  class = 'S5'><td  class = 'S6'><div  class = 'S7'><span>7</span></div></td><td  class = 'S6'><div  class = 'S7'><span>Embedded Coder Support Package for ARM Cortex-M Processors</span></div><div  class = 'S7'><span>(Base Support Package from MathWorks)</span></div></td><td  class = 'S6'><div  class = 'S7'><span>Available via Add-Ons Explorer</span></div></td><td  class = 'S6'><div  class = 'S7'><a href = "https://in.mathworks.com/matlabcentral/fileexchange/43095-embedded-coder-support-package-for-arm-cortex-m-processors"><span>Embedded Coder Support Package for ARM Cortex-M Processors - File Exchange - MATLAB Central</span></a></div><div  class = 'S7'><span>Or via Add-Ons Explorer </span></div><div  class = 'S7'><a href = "https://in.mathworks.com/help/matlab/add-ons.html"><span>Add-Ons - MATLAB &amp; Simulink</span></a></div></td></tr></table><div  class = 'S1'><span>Note: SysConfig/Syscfg will be used as an alias for TI System Configuration Tool in documentation</span></div><h3  class = 'S3'><span>Installation:</span></h3><h4  class = 'S8'><span>Download and install the pre-requisites:</span></h4><div  class = 'S1'><span></span></div><h3  class = 'S3'><span>Code Composer Studio - Download and install CCS 20.5.0</span></h3><ul  class = 'S9'><li  class = 'S10'><span>Obtain CCS_20.5.0.00028_win.zip from </span><a href = "https://www.ti.com/tool/download/CCSTUDIO"><span>https://www.ti.com/tool/download/CCSTUDIO</span></a><span> </span></li><li  class = 'S10'><span>Extract the zip and run the executable ccs_setup_20.5.0.00028.exe</span></li><li  class = 'S10'><span>Use Installation Directory as C:\ti\ccs2050</span></li><li  class = 'S10'><span>in Select Components, Choose, 'AM13x Arm-based microcontrollers'</span></li><li  class = 'S10'><span>Wait for completion of the installation (approx. 10 mins) and click 'Finish'</span></li></ul><h3  class = 'S3'><span>AM13E2X SDK - Download and install the version mentioned above</span></h3><ul  class = 'S9'><li  class = 'S10'><span>Obtain am13e230x_sdk_26_00_00_06_STS-windows-x64-installer.exe from </span><a href = "https://www.ti.com/tool/download/AM13E2X-SDK/26.00.00.06.STS"><span>AM13E2X-SDK Software development kit (SDK) | TI.com</span></a></li><li  class = 'S10'><span>Run the executable</span></li><li  class = 'S10'><span>Use Installation Directory as C:\ti</span></li><li  class = 'S10'><span>Wait for completion of the installation (approx. 5 mins) and click 'Finish'</span></li></ul><h3  class = 'S3'><span>TI System Configuration Tool</span></h3><ul  class = 'S9'><li  class = 'S10'><span>Obtain sysconfig-1.27.0_4565-setup.exe from from </span><a href = "https://www.ti.com/tool/download/SYSCONFIG/1.27.0.4565"><span>SYSCONFIG IDE, configuration, compiler or debugger | TI.com</span></a></li><li  class = 'S10'><span>Run the executable</span></li><li  class = 'S10'><span>Use Installation Directory as C:\ti</span></li><li  class = 'S10'><span>Wait for completion of the installation and click 'Finish'</span></li></ul><h3  class = 'S3'><span>MATLAB/Simulink </span></h3><ul  class = 'S9'><li  class = 'S10'><span>Download and install R2025b MATLAB &amp; Simulink with the following products: MATLAB Coder, Simulink Coder, Embedded Coder</span></li><li  class = 'S10'><span>Motor Control Blockset for using motor control example</span></li><li  class = 'S10'><span>Simscape, Simscape Electrical for high fidelity simulation</span></li><li  class = 'S10'><span>Embedded Coder Support Package for ARM Cortex-M Support Processors (Base support package to use this AM13x specific support)</span></li><li  class = 'S10'><span>MinGW is an important compiler used as MEX compiler by many MATLAB workflows and also for make utility.</span></li></ul><h3  class = 'S3'><span>MinGW-w64 Compiler</span></h3><div  class = 'S1'><span>MinGW is an important compiler used as MEX compiler by many MATLAB workflows and also for the make utility.</span></div><div  class = 'S1'><span>To install the MinGW-w64 compiler:</span></div><ul  class = 'S9'><li  class = 'S10'><span>On the MATLAB Home tab, in the Environment section, click </span><span>Add-Ons</span></li><li  class = 'S10'><span>In the Add-Ons Explorer, search for</span><span> </span><span>MinGW</span></li><li  class = 'S10'><span>Select</span><span> </span><span>MATLAB Support for MinGW-w64 C/C++/Fortran Compiler</span><span> </span><span>and install</span></li></ul><div  class = 'S1'><span>Important: MinGW Installation Folder Cannot Contain Spaces</span></div><div  class = 'S1'><span>Do not install MinGW in a location with spaces in the path name.</span></div><ul  class = 'S9'><li  class = 'S10'><span>Incorrect:</span><span> </span><span style=' font-family: monospace;'>C:\Program Files\mingw-64</span></li><li  class = 'S10'><span>Correct:</span><span> </span><span style=' font-family: monospace;'>C:\mingw-64</span></li></ul><div  class = 'S1'><span>Installing MinGW in a path with spaces will cause build errors and prevent proper compilation of MEX files and generated code.</span></div><div  class = 'S1'><a href = "../chapter_1_introduction/introduction_am13x.html"><span>Back to main page</span></a></div>
+<br>
+<!-- 
+##### SOURCE BEGIN #####
+%% *Embedded Coder Support Package for Texas Instruments AM13x*
+% <../chapter_1_introduction/introduction_am13x.mlx Back to main page>
+%% Getting Started
+% Requirements:
+%% 
+% 
+%% 
+% Name
+%% 
+% Version
+%% 
+% Download Links
+%% 
+% 1
+%% 
+% Code Composer Studio
+%% 
+% 20.5.0
+%% 
+% <https://www.ti.com/tool/download/CCSTUDIO/20.5.0 CCSTUDIO IDE, configuration, 
+% compiler or debugger | TI.com>
+%% 
+% 2
+%% 
+% TI-ARM-CLANG compiler
+%% 
+% v4.0.4LTS
+%% 
+% use from CCS, e.g.: ccs2050\ccs\tools\compiler\ti-cgt-armllvm_4.0.4.LTS
+%% 
+% 3
+%% 
+% IAR Embedded WorkBench for Arm
+%% 
+% 9.70.1
+%% 
+% <https://updates.iar.com/?product=EWARM IAR>
+% 
+% <https://netstorage.iar.com/FileStore/STANDARD/001/004/200/ti_patch_AM13E230x_2_20260304.zip 
+% Patch> if EWARM v9.70 or lower
+% 
+% 
+%% 
+% 3
+%% 
+% AM13E2X-SDK — SDK for AM13E2x Devices
+%% 
+% 26_00_00_06
+%% 
+% <https://www.ti.com/tool/download/AM13E2X-SDK/26.00.00.06.STS AM13E2X-SDK 
+% Software development kit (SDK) | TI.com>
+%% 
+% 4
+%% 
+% TI System Configuration Tool
+%% 
+% 1.27.0
+%% 
+% <https://www.ti.com/tool/download/SYSCONFIG/1.27.0.4565 SYSCONFIG IDE, configuration, 
+% compiler or debugger | TI.com>
+%% 
+% 5
+%% 
+% MATLAB
+%% 
+% R2025b or higher
+%% 
+% <https://www.mathworks.com/downloads https://www.mathworks.com/downloads> 
+% (requires sign-in) 
+%% 
+% 6
+%% 
+% MinGW-w64
+%% 
+% 8.1 or higher for MATLAB R2025b
+% 
+% 14.2 or higher for MATLAB R2026a
+%% 
+% <https://in.mathworks.com/matlabcentral/fileexchange/52848-matlab-support-for-mingw-w64-c-c-fortran-compiler 
+% MATLAB Support for MinGW-w64 C/C++/Fortran Compiler - File Exchange - MATLAB 
+% Central>
+% 
+% 
+% 
+% 
+%% 
+% 7
+%% 
+% Embedded Coder Support Package for ARM Cortex-M Processors
+% 
+% (Base Support Package from MathWorks)
+%% 
+% Available via Add-Ons Explorer
+%% 
+% <https://in.mathworks.com/matlabcentral/fileexchange/43095-embedded-coder-support-package-for-arm-cortex-m-processors 
+% Embedded Coder Support Package for ARM Cortex-M Processors - File Exchange - 
+% MATLAB Central>
+% 
+% Or via Add-Ons Explorer 
+% 
+% <https://in.mathworks.com/help/matlab/add-ons.html Add-Ons - MATLAB & Simulink>
+%% 
+% Note: SysConfig/Syscfg will be used as an alias for TI System Configuration 
+% Tool in documentation
+% Installation:
+% Download and install the pre-requisites:
+% 
+% Code Composer Studio - Download and install CCS 20.5.0
+%% 
+% * Obtain CCS_20.5.0.00028_win.zip from <https://www.ti.com/tool/download/CCSTUDIO 
+% https://www.ti.com/tool/download/CCSTUDIO> 
+% * Extract the zip and run the executable ccs_setup_20.5.0.00028.exe
+% * Use Installation Directory as C:\ti\ccs2050
+% * in Select Components, Choose, 'AM13x Arm-based microcontrollers'
+% * Wait for completion of the installation (approx. 10 mins) and click 'Finish'
+% AM13E2X SDK - Download and install the version mentioned above
+%% 
+% * Obtain am13e230x_sdk_26_00_00_06_STS-windows-x64-installer.exe from <https://www.ti.com/tool/download/AM13E2X-SDK/26.00.00.06.STS 
+% AM13E2X-SDK Software development kit (SDK) | TI.com>
+% * Run the executable
+% * Use Installation Directory as C:\ti
+% * Wait for completion of the installation (approx. 5 mins) and click 'Finish'
+% TI System Configuration Tool
+%% 
+% * Obtain sysconfig-1.27.0_4565-setup.exe from from <https://www.ti.com/tool/download/SYSCONFIG/1.27.0.4565 
+% SYSCONFIG IDE, configuration, compiler or debugger | TI.com>
+% * Run the executable
+% * Use Installation Directory as C:\ti
+% * Wait for completion of the installation and click 'Finish'
+% MATLAB/Simulink 
+%% 
+% * Download and install R2025b MATLAB & Simulink with the following products: 
+% MATLAB Coder, Simulink Coder, Embedded Coder
+% * Motor Control Blockset for using motor control example
+% * Simscape, Simscape Electrical for high fidelity simulation
+% * Embedded Coder Support Package for ARM Cortex-M Support Processors (Base 
+% support package to use this AM13x specific support)
+% * MinGW is an important compiler used as MEX compiler by many MATLAB workflows 
+% and also for make utility.
+% MinGW-w64 Compiler
+% MinGW is an important compiler used as MEX compiler by many MATLAB workflows 
+% and also for the make utility.
+% 
+% To install the MinGW-w64 compiler:
+%% 
+% * On the MATLAB Home tab, in the Environment section, click Add-Ons
+% * In the Add-Ons Explorer, search for MinGW
+% * Select MATLAB Support for MinGW-w64 C/C++/Fortran Compiler and install
+%% 
+% Important: MinGW Installation Folder Cannot Contain Spaces
+% 
+% Do not install MinGW in a location with spaces in the path name.
+%% 
+% * Incorrect: |C:\Program Files\mingw-64|
+% * Correct: |C:\mingw-64|
+%% 
+% Installing MinGW in a path with spaces will cause build errors and prevent 
+% proper compilation of MEX files and generated code.
+% 
+% <../chapter_1_introduction/introduction_am13x.mlx Back to main page>
+##### SOURCE END #####
+-->
+</div></body></html>

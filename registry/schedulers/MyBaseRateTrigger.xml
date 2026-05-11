@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="3.0">
+  <name>My Base Rate Trigger</name>
+  <targetname>AM13X</targetname>
+  <configurestartcall>TickConfig(modelBaseRate, systemClock)</configurestartcall>
+</productinfo>

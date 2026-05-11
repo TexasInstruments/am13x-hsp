@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<MF0 version="1.1" packageUris="http://schema.mathworks.com/mf0/target/19700101 http://schema.mathworks.com/mf0/targetmodelclasses/19700101">
+  <target.Board type="target.Board">
+    <Name>AM13E230x</Name>
+    <Tools type="target.Tools"/>
+  </target.Board>
+</MF0>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB 2025b"><title>Embedded Coder Support Package for Texas Instruments AM13x</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.8px; min-height: 0px; white-space: pre-wrap; color: rgb(192, 76, 11); font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: 400; text-align: left;  }
+.S1 { margin: 20px 10px 5px 4px; padding: 0px; line-height: 25px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: 700; text-align: left;  }
+.S2 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.S3 { margin: 10px 0px 20px; padding-left: 0px; font-family: Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif; font-size: 14px;  }
+.S4 { margin-left: 56px; line-height: 21px; min-height: 0px; text-align: left; white-space: pre-wrap;  }</style></head><body><div class = rtcContent><h1  class = 'S0'><span style=' font-weight: bold;'>Embedded Coder Support Package for Texas Instruments AM13x</span></h1><h2  class = 'S1'><span style=' font-weight: bold;'>Version: 26.0.0</span></h2><div  class = 'S2'><span>Design models in Simulink, generate code using Embedded Coder, and run the executables on AM13x devices designed for real-time control applications without using manual programming. Apply industry-proven techniques for Model-Based Design to verify that the algorithms work during simulation and then implement the algorithms as standalone applications on the AM13x platforms using automatic code generation. By default, the generated code is ANSI/ISO C/C++.</span></div><div  class = 'S2'><span>Embedded Coder Support Package for Texas Instruments AM13x Processors supports:</span></div><ul  class = 'S3'><li  class = 'S4'><span>Code Replacement Library (CRL) for Trigonometric math unit (TMU)</span></li><li  class = 'S4'><span>TI System Configuration Tool (sysconfig)</span></li><li  class = 'S4'><span>TI CCS IDE project creation</span></li><li  class = 'S4'><span>Processor in loop (PIL) with Profiling</span></li><li  class = 'S4'><span>Monitor and tune (External mode)</span></li></ul><h2  class = 'S1'><span>Supported Devices</span></h2><ul  class = 'S3'><li  class = 'S4'><span>AM13E230x launchpad: </span><a href = "https://www.ti.com/tool/LP-AM13E230"><span>https://www.ti.com/tool/LP-AM13E230</span></a></li></ul><h2  class = 'S1'><span>Supported Toolchains</span></h2><ul  class = 'S3'><li  class = 'S4'><span>TI ARM Clang</span></li><li  class = 'S4'><span>IAR</span></li></ul><h2  class = 'S1'><span>Documentation</span></h2><div  class = 'S2'><a href = "../chapter_2_pre_requisite\pre_requisite_am13x.html"><span>Pre Requisite</span></a></div><div  class = 'S2'><a href = "../chapter_3_hsp_installation\hsp_installation_am13x.html"><span>HSP Installation</span></a></div><div  class = 'S2'><a href = "../chapter_4_model_configuration\model_configuration_am13x.html"><span>Model Configuration</span></a></div><div  class = 'S2'><a href = "../chapter_5_verification_and_validation\verification_and_validation_am13x.html"><span>Verification and Validation</span></a></div><div  class = 'S2'><a href = "../chapter_6_examples\examples_am13x.html"><span>Examples</span></a></div><div  class = 'S2'><a href = "../chapter_7_blocks\blocks_am13x.html"><span>Blocks</span></a></div><div  class = 'S2'><a href = "../chapter_8_functions\functions_am13x.html"><span>Functions</span></a></div><div  class = 'S2'><a href = "../chapter_9_release_notes/release_notes_am13x.html"><span>Release Notes</span></a></div><div  class = 'S2'><span></span></div><div  class = 'S2'><span></span></div><div  class = 'S2'></div>
+<br>
+<!-- 
+##### SOURCE BEGIN #####
+%% *Embedded Coder Support Package for Texas Instruments AM13x*
+%% *Version: 26.0.0*
+% Design models in Simulink, generate code using Embedded Coder, and run the 
+% executables on AM13x devices designed for real-time control applications without 
+% using manual programming. Apply industry-proven techniques for Model-Based Design 
+% to verify that the algorithms work during simulation and then implement the 
+% algorithms as standalone applications on the AM13x platforms using automatic 
+% code generation. By default, the generated code is ANSI/ISO C/C++.
+% 
+% Embedded Coder Support Package for Texas Instruments AM13x Processors supports:
+%% 
+% * Code Replacement Library (CRL) for Trigonometric math unit (TMU)
+% * TI System Configuration Tool (sysconfig)
+% * TI CCS IDE project creation
+% * Processor in loop (PIL) with Profiling
+% * Monitor and tune (External mode)
+%% Supported Devices
+%% 
+% * AM13E230x launchpad: <https://www.ti.com/tool/LP-AM13E230 https://www.ti.com/tool/LP-AM13E230>
+%% Supported Toolchains
+%% 
+% * TI ARM Clang
+% * IAR
+%% Documentation
+% <../chapter_2_pre_requisite\pre_requisite_am13x.mlx Pre Requisite>
+% 
+% <../chapter_3_hsp_installation\hsp_installation_am13x.mlx HSP Installation>
+% 
+% <../chapter_4_model_configuration\model_configuration_am13x.mlx Model Configuration>
+% 
+% <../chapter_5_verification_and_validation\verification_and_validation_am13x.mlx 
+% Verification and Validation>
+% 
+% <../chapter_6_examples\examples_am13x.mlx Examples>
+% 
+% <../chapter_7_blocks\blocks_am13x.mlx Blocks>
+% 
+% <../chapter_8_functions\functions_am13x.mlx Functions>
+% 
+% <../chapter_9_release_notes/release_notes_am13x.mlx Release Notes>
+% 
+% 
+% 
+% 
+% 
+%
+##### SOURCE END #####
+-->
+</div></body></html>

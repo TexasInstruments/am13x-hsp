@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<productinfo version="2.0">
+  <name>AM13E230x</name>
+  <release>R2025b</release>
+  <baseproductid>4</baseproductid>
+  <displayname>AM13E230x</displayname>
+  <deviceid>ARM Cortex-M33</deviceid>
+  <numofcores>1</numofcores>
+  <productionhwdevicetype>ARM Compatible-&gt;ARM Cortex</productionhwdevicetype>
+  <enableprodhwdevicetype>false</enableprodhwdevicetype>
+  <supportsonlysimulation>false</supportsonlysimulation>
+  <toolchain loadcommand="am13x.internal.loadAndRun" loadcommandargs="hCS">
+    <name>TI ARM Clang Compiler AM13x | gmake</name>
+    <IsLoadCommandMATLABFcn>true</IsLoadCommandMATLABFcn>
+    <loadername>AM13x loader</loadername>
+  </toolchain>
+  <toolchain loadcommand="am13x.internal.loadAndRun" loadcommandargs="hCS">
+    <name>IAR ARM Compiler AM13x | gmake</name>
+    <IsLoadCommandMATLABFcn>true</IsLoadCommandMATLABFcn>
+    <loadername>hwInfo.loaderName</loadername>
+  </toolchain>
+  <parameterinfo>$(TARGET_ROOT)/registry/parameters/AM13E230x.xml</parameterinfo>
+  <attributeinfo>$(TARGET_ROOT)/registry/attributes/AM13XDeployerAM13E230x.xml</attributeinfo>
+  <scheduler>$(TARGET_ROOT)/registry/schedulers/MyBaseRateTrigger.xml</scheduler>
+  <esbcompatible>0</esbcompatible>
+  <supportssocbprofiling>0</supportssocbprofiling>
+  <taskmap>
+    <issupported>false</issupported>
+    <useautomap>false</useautomap>
+    <usedynamicevents>false</usedynamicevents>
+    <iseditable>false</iseditable>
+  </taskmap>
+  <supportsperipherals>false</supportsperipherals>
+  <supportssocshared>false</supportssocshared>
+  <supportsconnectedio>false</supportsconnectedio>
+  <defaultioblocksmode>deployed</defaultioblocksmode>
+  <supportsdevicedriverapp>false</supportsdevicedriverapp>
+</productinfo>

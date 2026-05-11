@@ -1,0 +1,143 @@
+%% Copyright (C) 2026 Texas Instruments Incorporated
+%%     %
+%% Redistribution and use in source and binary forms, with or without
+%% modification, are permitted provided that the following conditions
+%% are met:
+%%     %
+%%   Redistributions of source code must retain the above copyright
+%%   notice, this list of conditions and the following disclaimer.
+%%     %
+%%   Redistributions in binary form must reproduce the above copyright
+%%   notice, this list of conditions and the following disclaimer in the
+%%   documentation and/or other materials provided with the
+%%   distribution.
+%%     %
+%%   Neither the name of Texas Instruments Incorporated nor the names of
+%%   its contributors may be used to endorse or promote products derived
+%%   from this software without specific prior written permission.
+%%     %
+%% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+%% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+%% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+%% A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+%% OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+%% SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+%% LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+%% DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+%% THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+%% (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+%% OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%selectfile NULL_FILE
+
+%assign AM13x_HSP_TLC_ROOT = FEVAL("am13x.get_tlc_root")
+%addincludepath AM13x_HSP_TLC_ROOT
+
+%% Need to set the template compliance flag before we can use the API
+%assign MATLAB_ROOT = FEVAL("matlabroot")
+%assign MAINLIB_ROOT = FULLFILE(MATLAB_ROOT, "toolbox", "target", "codertarget", "rtw")
+%assign ISESBENABLED = FEVAL("codertarget.utils.isESBEnabled", CompiledModel.Name)
+%assign ISTSKMGRFOUND = FEVAL("codertarget.utils.isTaskManagerFound", CompiledModel.Name)
+%% Reference models in SoC does not include "Task Manager" block. Including, hardware board feature set to make sure, code is being generated for SoC Blockset based hardware board.
+%assign HWBOARDFEATURESET = FEVAL("get_param", CompiledModel.Name,"HardwareBoardFeatureSet")
+%assign GENERATE_SOC_PERIPHERALS = FEVAL("codertarget.targethardware.arePeripheralsSupported", CompiledModel.Name)
+%% SDCARDINBACKGROUNDTASK is a global variable used in mainOS, multiratemultitaskingOS and multiratesingletaskingOS TLCs
+%assign ::SDCARDINBACKGROUNDTASK = FEVAL("codertarget.attributes.getAttribute", CompiledModel.Name, "SDCardInBackgroundTask")
+%%assign ISTOPMDLBUILD = (CompiledModel.ModelReferenceTargetType == "NONE")
+%%
+%addincludepath MAINLIB_ROOT
+%assign RTOS = FEVAL("codertarget.targethardware.getTargetRTOS", CompiledModel.Name)
+%assign ::INCLUDE_MW_TARGET_HARDWARE_RESOURCES = FEVAL("codertarget.utils.isPeripheralBlockUsed",CompiledModel.Name)
+%%if ISTOPMDLBUILD && (ExportFunctionsMode != 0 || SLibIsExportFcnDiagram())
+%%<SLibReportErrorWithId("codertarget:build:ExpFcnTopMdlError")>
+%%assign errTxt = "This model is an export function model. This modeling style is not supported when the Hardware Board is not set to None. Set the Hardware Board to None and generate code again."
+%%<LibReportError(errTxt)>
+%%endif
+
+%if ISEQUAL(RTOS, "Baremetal")
+    %include "codertarget_bareboard.tlc"
+    %if ISEQUAL(ISESBENABLED, TLC_TRUE) && ISEQUAL(ISTSKMGRFOUND, TLC_TRUE)
+        %include "socb_utils.tlc"
+        %include "socb_mainwithoutOS.tlc"
+        %include "socb_multiratemultitasking.tlc"
+        %include "socb_multiratesingletasking.tlc"
+    %else
+        %include "codertarget_mainwithoutOS.tlc"
+        %include "codertarget_multiratemultitasking.tlc"
+        %include "codertarget_multiratesingletasking.tlc"
+    %endif
+%else
+    %include "codertarget_OS.tlc"
+    %if ISEQUAL(ISESBENABLED, TLC_TRUE) && ISEQUAL(ISTSKMGRFOUND, TLC_TRUE)
+        %include "socb_mainOS.tlc"
+        %include "socb_multiratemultitaskingOS.tlc"
+        %include "socb_multiratesingletaskingOS.tlc"
+    %else
+        %include "AM13x_codertarget_mainOS.tlc"
+        %include "codertarget_multiratemultitaskingOS.tlc"
+        %include "codertarget_multiratesingletaskingOS.tlc"
+    %endif
+%endif
+%include "codertarget_singleratesingletasking.tlc"
+%include "codertarget_utils.tlc"
+
+%if FEVAL("codertarget.target.supportsCoderTarget", CompiledModel.Name)
+    %assign ::ISCODERTARGET = 1
+    %assign ::ProfileGenCode = 0
+    %assign ::isProfilePIL = 0
+    %assign ::isPIL = 0
+    %assign ::isLIB = 0
+    %assign tgt = FEVAL("codertarget.target.getTargetName" , CompiledModel.Name)
+
+    %if ISEQUAL(tgt, [])
+        %assign ::ISCODERTARGET = 0
+        %assign tgt = "unknown target"
+    %elseif ISEQUAL(tgt, "IBIS_AMI")
+        %assign TGT_ROOT = FEVAL("codertarget.target.getTargetFolder", tgt)
+        %assign SERDESTLCDIR = FULLFILE(TGT_ROOT, "tlc_c")
+        %addincludepath SERDESTLCDIR
+        %include "ibis_ami_file_process.tlc"
+    %elseif (ISEQUAL(tgt, "TI C2000") || ISEQUAL(tgt, "Texas Instruments C2000 Concerto")) && ISEQUAL(CompiledModel.ConfigSet.ProdHWDeviceType, "Texas Instruments->C2000")
+        %assign ML_ROOT = FEVAL("matlabroot")
+        %assign TGT_ROOT = FEVAL("codertarget.target.getTargetFolder", "TI C2000")
+        %assign TGT_ROOT = FULLFILE(TGT_ROOT, "tlc_c")
+        %addincludepath TGT_ROOT
+        %assign OLDTGTLIB_ROOT = FULLFILE(ML_ROOT, "toolbox", "idelink", "extensions", "ticcs", "c2000")
+        %addincludepath OLDTGTLIB_ROOT
+        %include "tic2000_compatibility.tlc"
+        %if ISEQUAL(IRInfo.sysinfo.tgtPrefs.chipInfo.subFamily, "281x")
+            %include "ti_c281x_csl.tlc"
+        %else
+            %include "ti_c280x_csl.tlc"
+        %endif
+    %elseif (ISEQUAL(tgt, "TI C2000 SOC")) && ISEQUAL(CompiledModel.ConfigSet.ProdHWDeviceType, "Texas Instruments->C2000")
+        %assign ML_ROOT = FEVAL("matlabroot")
+        %assign TGT_ROOT = FEVAL("codertarget.target.getTargetFolder", "TI C2000 SOC")
+        %assign TGT_ROOT = FULLFILE(TGT_ROOT, "tlc_c")
+        %addincludepath TGT_ROOT
+        %include "tic2000_compatibility.tlc"
+        %include "ti_c280x_csl.tlc"
+    %endif
+%else
+    %assign ::ISCODERTARGET = 0
+%endif
+%if ISEQUAL(::ISCODERTARGET, 1)
+    %if GenerateSampleERTMain
+        %assign CompiledModel.GenerateSampleERTMain = TLC_FALSE
+    %endif
+
+    %if (CompiledModel.ModelReferenceTargetType == "NONE")
+        %if !ISEQUAL(tgt, "IBIS_AMI")
+            %<SLibCreateMain("ert_main")>
+        %endif
+    %endif
+    %if (CompiledModel.ModelReferenceTargetType != "NONE")  && ISEQUAL(::INCLUDE_MW_TARGET_HARDWARE_RESOURCES, 1)
+        %openfile tmpHdrBuf
+        #include "MW_target_hardware_resources.h"
+        %closefile tmpHdrBuf
+        %<SLibCacheCodeToFile("mdl_hdr_custom_incl", tmpHdrBuf)>
+    %endif
+%endif
